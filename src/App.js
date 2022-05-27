@@ -32,11 +32,16 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         const roomsArray = [];
+        const htmlArray = [];
         data.forEach((room) => {
-          if (room.homeId === id) roomsArray.push(room);
+          if (room.homeId === id) {
+            roomsArray.push(room);
+            htmlArray.push(<CardRoom name={room.name} />);
+          }
         });
 
         setRooms(roomsArray);
+        setRoomsHTML(htmlArray);
       });
   };
 
@@ -57,7 +62,7 @@ function App() {
           );
         })}
       </div>
-      <div className="row"></div>
+      <div className="row">{rooms.length > 0 ? roomsHTML : null}</div>
     </React.Fragment>
   );
 }
